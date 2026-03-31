@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Page</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='output.css')}}">
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-950 via-blue-800 to-blue-950">
+
+    <div class="bg-white/10 backdrop-blur-lg shadow-xl rounded-2xl p-8 w-[90%] max-w-md border border-white/20">
+
+        <h1 class="text-2xl text-white font-bold text-center mb-6">
+            Enter Your Review
+        </h1>
+
+        <form method="POST" action="/predict">
+            <textarea 
+                name = 'review'
+                placeholder="Write your review here..."
+                class="w-full h-32 p-3 rounded-lg bg-white/20 text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-blue-400 resize-none mb-5">
+            </textarea>
+
+        <button class="w-full py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition duration-300 text-white font-semibold shadow-md">
+            Submit Review
+        </button>
+        </form>
+
+        <p class="text-center text-sm text-gray-300 mt-4">
+            {{prediction_text}}
+        </p>
+
+    </div>
+
+</body>
+</html>
