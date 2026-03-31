@@ -14,6 +14,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 from wordcloud import WordCloud
 
+nltk.download('punkt')
 nltk.download('stopwords')
 
 
