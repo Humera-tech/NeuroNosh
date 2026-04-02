@@ -1,8 +1,12 @@
 from flask import Flask, render_template,request
 import pickle
 import re
+import nltk 
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
+
+nltk.download('stopwords')
+nltk.download('punkt')
 
 app = Flask(__name__)
 
@@ -39,6 +43,8 @@ def predict():
     result = "Positive 😊" if predict==1 else "negative😞"
     return render_template('index.html',prediction_text = result)
 
+import os 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)

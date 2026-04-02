@@ -2,6 +2,7 @@ from flask import Flask,render_template
 import pandas as pd 
 import numpy as np 
 import warnings
+import nltk
 import nltk.tokenize 
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer 
@@ -61,14 +62,10 @@ df['processed_text'] = corpus
 
 wc = WordCloud(width=500,height=500,min_font_size=8,background_color="white")
 positive = wc.generate(df[df['Liked']==1]['processed_text'].str.cat(sep=" "))
-plt.imshow(positive)
-plt.savefig('positive.jpg')
-plt.show()
+
 
 negetive = wc.generate(df[df['Liked']==0]['processed_text'].str.cat(sep=" "))
-plt.imshow(negetive)
-plt.savefig('negetive.jpg')
-plt.show()
+
 
 cv = CountVectorizer(max_features=1500)
 
@@ -77,19 +74,6 @@ y = df['Liked']
 
 x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2,random_state=42)
 
-gnb = GaussianNB()
-gnb.fit(x_train,y_train)
-y_pred= gnb.predict(x_test)
-
-accuracy = accuracy_score(y_test,y_pred)
-print(accuracy)#accuracy : 0.68
-
-lr = LogisticRegression()
-lr.fit(x_train,y_train)
-lr_prediction = lr.predict(x_test)
-
-accuracy2 = accuracy_score(y_test,lr_prediction)
-print(accuracy2) #0.795 accuracy
 
 from sklearn.ensemble import RandomForestClassifier
 
